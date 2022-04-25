@@ -78,7 +78,7 @@ impl Statement  {
     /// The parameter value is serialized into a `Value`. Since the serialization can fail, the
     /// method returns a `Result`
     pub fn add_param<K, V>(&mut self, key: K, value: V) -> Result<(), JsonError>
-        where K: Into<String>, V: Serialize + Copy
+        where K: Into<String>, V: Serialize
     {
         self.parameters.insert(key.into(), serde_json::value::to_value(&value)?);
         Ok(())
@@ -103,7 +103,7 @@ impl Statement  {
     /// # }
     /// ```
     pub fn with_param<K, V>(mut self, key: K, value: V) -> Result<Self, JsonError>
-        where K: Into<String>, V: Serialize + Copy
+        where K: Into<String>, V: Serialize
     {
         self.add_param(key, value)?;
         Ok(self)
